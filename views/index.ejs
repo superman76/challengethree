@@ -12,12 +12,35 @@
   </head>
 <body class="container">
 
+
 <h1><%= title %></h1>
 <ul>
   <% for(var i=0; i<bears.length; i++) {%>
      <li><%= bears[i].name %></li>
   <% } %>
 </ul>
+
+<form action="/api/bears" method="POST" role="form">
+  <legend>add new bear</legend>
+
+  <div class="form-group">
+    <label for="">name</label>
+    <input name="name" type="text" class="form-control" id="" placeholder="">
+  </div>
+
+  <div class="form-group">
+    <label for="">age</label>
+    <input name="age" type="number" class="form-control" id="" placeholder="">
+  </div>
+
+  <div class="form-group">
+    <label for="">gender</label>
+    <input name="gender" type="text" class="form-control" id="" placeholder="">
+  </div>
+  
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
 
 </body>
