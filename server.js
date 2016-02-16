@@ -69,9 +69,9 @@ router.route('/bears/:bear_id')
       if(err){
         console.log(err)
       } else {
-        bear.name = req.body.name ? req.body.name : bear.name;
-        bear.age = req.body.age ? req.body.age : bear.age;
-        bear.gender = req.body.gender ? req.body.gender : bear.gender;
+        bear.name = req.body.name || bear.name;
+        bear.age = req.body.age || bear.age;
+        bear.gender = req.body.gender || bear.gender;
 
         bear.save(function(err){
           if(err){
@@ -83,9 +83,15 @@ router.route('/bears/:bear_id')
       }
     })
   })
-
-
-
+  .delete(function(req, res){
+    Bear.remove({_id: req.params.bear_id}, function(err, bear){
+      if(err){
+        console.log(err)
+      } else {
+        res.json({title: 'bear was successfully deleted!'})
+      }
+    })
+  });
 
 app.use('/api', router);
 
