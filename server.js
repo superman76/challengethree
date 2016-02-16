@@ -25,7 +25,13 @@ router.use(function(req, res, next){
 
 
 app.get('/', function(req, res){
-  res.render('index')
+    Bear.find(function(err, bears){
+      if(err){
+        console.log(err)
+      } else {
+        res.render('index', {title: 'hello world!', bears: bears})
+      }
+    })
 });
 
 router.route('/bears')

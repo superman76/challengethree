@@ -12,8 +12,13 @@
   </head>
 <body class="container">
 
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
+<h1><%= title %></h1>
+<ul>
+  <% for(var i=0; i<bears.length; i++) {%>
+     <li><%= bears[i].name %></li>
+  <% } %>
+</ul>
+
 
 </body>
 <script src="https://code.jquery.com/jquery-2.2.0.js"></script>
