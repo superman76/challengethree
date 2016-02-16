@@ -10,6 +10,8 @@ var Bear = require('./models/bear');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.set('view engine', 'ejs');
+
 
 var port = process.env.PORT || 8080;
 
@@ -22,10 +24,9 @@ router.use(function(req, res, next){
 
 
 
-router.get('/', function(req, res){
-  res.json({title: 'hooray it worked!!'})
+app.get('/', function(req, res){
+  res.render('index')
 });
-
 
 router.route('/bears')
   .post(function(req, res){
@@ -94,7 +95,6 @@ router.route('/bears/:bear_id')
   });
 
 app.use('/api', router);
-
 
 app.listen(port, function(){
   console.log("app listening on port " + port)
