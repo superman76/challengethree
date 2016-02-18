@@ -27,8 +27,6 @@ var addBear = function(event){
   var gender = $('#gender').val();
   var $table = $('#bearTable');
 
-
-
   var bear = {};
   bear.name = name;
   bear.age = age;
@@ -39,6 +37,7 @@ var addBear = function(event){
       method: 'POST',
       data: bear
     }).done(function(data){
+
       console.log('I posted a bear!', data);
 
       $table.append('<tr id=' + data._id + '> \
