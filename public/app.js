@@ -17,6 +17,7 @@ var deleteBear = function(){
 }
 
 $('.deleteBear').on('click', deleteBear);
+ 
 
 var addBear = function(event){
   event.preventDefault();
@@ -24,35 +25,88 @@ var addBear = function(event){
   var name = $('#name').val();
   var age = $('#age').val();
   var gender = $('#gender').val();
-  var table = $('#bearTable');
+  var $table = $('#bearTable');
+
+
 
   var bear = {};
   bear.name = name;
   bear.age = age;
   bear.gender = gender;
 
-  $.ajax({
-    url: '/api/bears',
-    method: 'POST',
-    data: bear
-  }).done(function(d){
-    var id = d._id;
-    var name = d.name;
-    var age = d.age;
-    var gender = d.gender;
-      table.append('<tr id=' + d._id + '> \
-                <td>' + name + '</td> \
-                <td>' + age + '</td> \
-                <td>' + gender + '</td> \
-                <td><button class="btn btn-primary deleteBear">delete</button></td> \
-              </tr>'
-            );
-    $('.deleteBear').on('click', deleteBear);
-  })
+    $.ajax({
+      url: '/api/bears',
+      method: 'POST',
+      data: bear
+    }).done(function(data){
+      console.log('I posted a bear!', data);
 
-}
+      $table.append('<tr id=' + data._id + '> \
+                      <td>' + data.name + '</td> \
+                      <td>' + data.age + '</td> \
+                      <td>' + data.gender + '</td> \
+                      <td><button class="btn btn-warning deleteBear">delete</button></td> \
+                    </tr>'
+                  );
+      $('.deleteBear').on('click', deleteBear);
+      $('#name').val('');
+      $('#age').val('');
+      $('#gender').val('');
+    })
+
+
+};
 
 $('#addBear').on('click', addBear);
+
+
+
+
+
+
+
+
+
+
+
+
+
+// var addBear = function(event){
+//   event.preventDefault();
+
+//   var name = $('#name').val();
+//   var age = $('#age').val();
+//   var gender = $('#gender').val();
+//   var table = $('#bearTable');
+
+//   var bear = {};
+//   bear.name = name;
+//   bear.age = age;
+//   bear.gender = gender;
+
+//   $.ajax({
+//     url: '/api/bears',
+//     method: 'POST',
+//     data: bear
+//   }).done(function(d){
+//     var id = d._id;
+//     var name = d.name;
+//     var age = d.age;
+//     var gender = d.gender;
+
+//       table.append('<tr id=' + d._id + '> \
+//                 <td>' + name + '</td> \
+//                 <td>' + age + '</td> \
+//                 <td>' + gender + '</td> \
+//                 <td><button class="btn btn-warning deleteBear">delete</button></td> \
+//               </tr>'
+//             );
+
+//     $('.deleteBear').on('click', deleteBear);
+//   })
+
+// }
+
 
 
 
