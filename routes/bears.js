@@ -21,7 +21,7 @@ router.route('/bears')
 
     bear.save(function(err, bear){
       if(err){
-        console.log(err)
+        res.send(err)
       } else {
         res.json(bear)
       }
@@ -30,7 +30,7 @@ router.route('/bears')
   .get(function(req, res){
     Bear.find(function(err, bears){
       if(err){
-        console.log(err)
+        return next(err);
       } else {
         res.json(bears)
       }
