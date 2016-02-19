@@ -3,13 +3,11 @@ var app = express();
 var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/animals');
+mongoose.connect('mongodb://localhost/challangeTwo');
 
-var Bear = require('./models/bear');
+var Product = require('./models/product');
 
-var itsBrokens = '💩💩💩💩 broken'
-
-var bearRouter = require('./routes/bears')
+var productRouter = require('./routes/products')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -18,39 +16,21 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 
-
-
 app.set('view engine', 'ejs');
 
 var port = process.env.PORT || 8080;
 
 app.get('/', function(req, res){
-  res.render('index', {title: 'hello world'})
+
+  //Need to do Product.find to get all products,
+  //and then render the index page
+
+  res.render('index')
 });
 
 
-app.get('/bears', function(req, res){
-    Bear.find(function(err, bears){
-      if(err){
-        console.log(err)
-      } else {
-        res.render('bears', { bears: bears })
-      }
-    })
-});
-
-
-app.get('/about', function(req, res){
-  var data = {};
-  data.title = 'About Page';
-  data.name = 'Douglas';
-  data.time = new Date();
-
-  res.render('about', data);
-});
-
-app.use('/api', bearRouter);
+app.use('/api', somethingRouter);
 
 app.listen(port, function(){
-  console.log("🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥\n🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 fired up 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 \n🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 on " + port + " 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥\n🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥")
+  console.log('app listening on ')
 });
