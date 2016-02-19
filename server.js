@@ -24,6 +24,7 @@ app.get('/', function(req, res){
 
   //Need to do Product.find to get all products,
   //and then render the index page
+  //For inspiration, look at the GET route in routers/products
 
   res.render('index')
 });
