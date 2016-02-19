@@ -7,7 +7,7 @@ mongoose.connect('mongodb://localhost/challangeTwo');
 
 var Product = require('./models/product');
 
-var productRouter = require('./routes/products')
+var productRouter = require('./routes/products');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -21,17 +21,18 @@ app.set('view engine', 'ejs');
 var port = process.env.PORT || 8080;
 
 app.get('/', function(req, res){
-
-  //Need to do Product.find to get all products,
-  //and then render the index page
-  //For inspiration, look at the GET route in routers/products
-
-  res.render('index')
+  Product.find(function(err, products){
+    if(err){
+      next (err)
+    } else {
+      res.render('index', { products: products })
+    }
+  })
 });
 
 
-app.use('/api', somethingRouter);
+app.use('/api', productRouter);
 
 app.listen(port, function(){
-  console.log('app listening on ')
+  console.log('app listening on ' + port);
 });
