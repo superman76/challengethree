@@ -1,9 +1,10 @@
 # challange two
 
-##1) finish the POST route to create a new products using the api endpoint /api/products. Use POSTMAN to create some products.
+### 1) Finish the `POST` route for /api/products. Use POSTMAN to create some products.
 
-##2) Fix index.ejs to render actual products from our database.
+### 2) Fix index.ejs to render actual products from our database.
+##### You will need to update the route in `server.js` that serves index.ejs.
 
-##3) Finsih the ajax method in app.js to allow us to create a new product with the form.
+### 3) Finish the AJAX method in app.js to allow us to create a new product with the form.
 
-###There are several incorrectly named variables/ file links..
+#### Watchout for incorrectly named variables.

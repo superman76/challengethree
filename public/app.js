@@ -1,3 +1,5 @@
+console.log('YOU BETTER MAKE SURE YOU CAN SEE THIS IN YOUR CONSOLE....')
+
 var addProduct = function(event){
   event.preventDefault();
 
