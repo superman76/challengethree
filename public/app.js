@@ -1,43 +1,64 @@
-console.log('YOU BETTER MAKE SURE YOU CAN SEE THIS IN YOUR CONSOLE....')
+{/* 
+Need to ininitialize the state of products 
+Need to set the state of products
+*/} 
 
-var addProduct = function(event){
-  event.preventDefault();
-
-  var name = $('#name').val();
-  var inStock = $('#inStock').val();
-  var cost = $('#cost').val();
-
-  var $productTable = $('#productTable');
-
-  console.log(name, inStock, cost);
-
-
-  var product = {};
-  product.name = name;
-  product.inStock = inStock;
-  product.cost = cost;
-
-
+var ProductTable = React.createClass({
+  propTypes: {
+    url: React.PropTypes.string.isRequired,
+  },
+  loadProductsFromServer: function() {
+    var self = this;
     $.ajax({
-      url: '/api/products',
-      method: 'POST',
-      data: product
+      url: this.props.url,
+      method: 'GET'
     }).done(function(data){
-
-      console.log('I posted a product!', data);
-
-      $productTable.append('<tr id=' + data._id + '> \
-                <td>' + data.name + '</td> \
-                <td>' + data.cost + '</td> \
-                <td>' + data.inStock + '</td> \
-              </tr>'
-            );
-
-
-
+      {/* A JSX comment */}
+      {/* Your code here */}
     })
+  },
+  componentDidMount: function() {
+    this.loadProductsFromServer();
+  },
+  render: function() {
+    return (
+      <div>
+        <ProductList products={this.state.SOMETHING} />
+      </div>
+      )
+  }
+});
 
 
-};
+{/* 
+Filter through products and map only products in stock..
+Replace the table body section with dynamic data.
+*/}  
 
-$('#addProduct').on('click', addProduct);
+var  ProductList = React.createClass({
+  render: function() {
+        return (
+        <div>
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>product</th>
+                <th>cost </th>
+                <th> inStock </th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td> each name </td>
+              <td> each cost </td>
+              <td> inStock is true </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      )
+  }
+});
+
+React.render(<ProductTable />, document.getElementById('react-container'));
+{/* WHICH URL IS USED TO GET ALL PRODUCTS? */}
